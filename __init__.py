@@ -2,8 +2,6 @@ import pygame
 from Kangaroo import Kangaroo
 from BackGround import Background
 
-#life is a never ending struggle
-
 pygame.init()
 #Sets Up Screen
 screen = pygame.display.set_mode((1080, 540))
