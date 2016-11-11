@@ -2,7 +2,7 @@ import pygame
 from Kangaroo import Kangaroo
 from BackGround import Background
 
-#hello!
+#test 2
 
 pygame.init()
 #Sets Up Screen
