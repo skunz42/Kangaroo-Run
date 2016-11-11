@@ -2,6 +2,8 @@ import pygame
 from Kangaroo import Kangaroo
 from BackGround import Background
 
+#hello!
+
 pygame.init()
 #Sets Up Screen
 screen = pygame.display.set_mode((1080, 540))
