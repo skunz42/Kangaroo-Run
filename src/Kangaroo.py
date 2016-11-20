@@ -45,7 +45,7 @@ class Kangaroo(pygame.sprite.Sprite):
             
             if(self.y > 415):
                 self.y = 415
-                self.v = 0
+                self.v = -20
 
     def draw(self, screen):
         screen.blit(self.image, (self.x, self.y))
