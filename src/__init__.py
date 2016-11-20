@@ -29,13 +29,19 @@ done = False
 clock = pygame.time.Clock()
 
 while not done:
+    clock.tick(60)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+            
+    kang.handlekeys()
+    #screen.blit(kang, (0,0))
     
-    #screen.blit(background, (0,0))
+    screen.blit(backGround.image, (0,0))
     screen.blit(backGround.image, backGround.rect)
+    kang.draw(screen)
+
     kangSprite.update()
-    kangSprite.draw(screen)
+    #kangSprite.draw(screen)
+    pygame.display.update()
     pygame.display.flip()
-    clock.tick(60)
