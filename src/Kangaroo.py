@@ -7,7 +7,7 @@ class Kangaroo(pygame.sprite.Sprite):
         '''Initializes kangaroo sprite'''
         pygame.sprite.Sprite.__init__(self)
         self.image, self.rect = load_png('../assets/kangaroo-frame-0.png')
-
+        self.jumpup = False
         self.x = 0
         self.y = 415
         self.v = -20
@@ -37,15 +37,29 @@ class Kangaroo(pygame.sprite.Sprite):
         if(self.imageCounter == 4):
             self.imageCounter = 0
 
-    def handlekeys(self):
-        key = pygame.key.get_pressed()
-        if key[pygame.K_UP]:                        
+    def jump(self):
+        self.jumpup = True
+        #self.v += self.g #Increments velocity
+        #self.y += self.v #Changes y position
+            
+        #if(self.y > 415):
+         #   self.y = 415
+          #  self.v = -20
+           # self.jump = False
+
+    #def handlekeys(self):
+     #   key = pygame.key.get_pressed()
+      #  if key[pygame.K_UP]:
+       #     self.jump()
+
+    def draw(self, screen):
+        if self.jumpup:
             self.v += self.g #Increments velocity
             self.y += self.v #Changes y position
             
             if(self.y > 415):
                 self.y = 415
                 self.v = -20
-
-    def draw(self, screen):
+                self.jumpup = False
+            
         screen.blit(self.image, (self.x, self.y))

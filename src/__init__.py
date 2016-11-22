@@ -21,7 +21,6 @@ screen.blit(background, (0,0))
 pygame.display.flip()
 screen.blit(backGround.image, backGround.rect)
 
-
 kang = Kangaroo()
 kangSprite = pygame.sprite.RenderPlain(kang)
 
@@ -33,8 +32,11 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                kang.jump()
             
-    kang.handlekeys()
+    #kang.handlekeys()
     #screen.blit(kang, (0,0))
     
     screen.blit(backGround.image, (0,0))
