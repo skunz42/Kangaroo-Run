@@ -1,5 +1,6 @@
 import pygame
 from Kangaroo import Kangaroo
+from Cactus import Cactus
 from BackGround import Background
 
 #test 2
@@ -24,6 +25,9 @@ screen.blit(backGround.image, backGround.rect)
 kang = Kangaroo()
 kangSprite = pygame.sprite.RenderPlain(kang)
 
+cact = Cactus()
+cactSprite = pygame.sprite.RenderPlain(cact)
+
 done = False
 clock = pygame.time.Clock()
 
@@ -41,9 +45,14 @@ while not done:
     
     screen.blit(backGround.image, (0,0))
     screen.blit(backGround.image, backGround.rect)
+    
     kang.draw(screen)
-
     kangSprite.update()
+
+    cact.draw(screen)
+    cactSprite.update()
+
     #kangSprite.draw(screen)
+
     pygame.display.update()
     pygame.display.flip()
