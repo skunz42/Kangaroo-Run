@@ -30,11 +30,9 @@ cactSprite = pygame.sprite.RenderPlain(cact)
 
 done = False
 clock = pygame.time.Clock()
-score = 1
 
 while not done:
     clock.tick(60)
-    score += (score * .003)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
