@@ -39,6 +39,11 @@ while not done:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 kang.jump()
+
+    if kang.rect.colliderect(cact.rect):
+        #print(kang.rect.size, kang.rect.topleft, kang.rect.bottomright)
+        #print(cact.rect.size, cact.rect.topleft, cact.rect.bottomright)
+        kang.collide()
             
     #kang.handlekeys()
     #screen.blit(kang, (0,0))
