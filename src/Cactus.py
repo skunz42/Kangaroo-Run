@@ -10,7 +10,7 @@ class Cactus(pygame.sprite.Sprite):
 		self.y = 415
 		self.rect.x = 1080
 		self.rect.y = 415
-		self.v = 2
+		self.v = 25
 
 		screen = pygame.display.get_surface()
 		self.area = screen.get_rect()
