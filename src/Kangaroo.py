@@ -15,8 +15,8 @@ class Kangaroo(pygame.sprite.Sprite):
         self.y = 415
         self.rect.x = 0
         self.rect.y = 415
-        self.v = -20
-        self.g = 1
+        self.v = -25
+        self.g = 2
 
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
@@ -53,13 +53,13 @@ class Kangaroo(pygame.sprite.Sprite):
         if self.jumpup:
             self.v += self.g #Increments velocity
             self.rect.y += self.v #Changes y position
-            
+
             if(self.rect.y > 415):
                 self.rect.y = 415
-                self.v = -20
+                self.v = -25
                 self.jumpup = False
 
         if self.colliding:
             self.colliding = False
-            
+
         screen.blit(self.image, (self.rect.x, self.rect.y))
