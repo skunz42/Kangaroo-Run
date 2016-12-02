@@ -76,7 +76,7 @@ def game_loop():
         cact.draw(screen)
         cactSprite.update()
 
-        scoreSurf, scoreRect = text_objects(str(current_score), mediumText)
+        scoreSurf, scoreRect = text_objects(str(current_score), mediumText, black)
         scoreRect.center = (970, 35)
         screen.blit(scoreSurf, scoreRect)
 
@@ -85,8 +85,8 @@ def game_loop():
         pygame.display.update()
         pygame.display.flip()
 
-def text_objects(text, font):
-    textSurface = font.render(text, True, white)
+def text_objects(text, font, color = white):
+    textSurface = font.render(text, True, color)
     return textSurface, textSurface.get_rect()
 
 def button(msg,x,y,w,h,i_color,a_color,action=None):
