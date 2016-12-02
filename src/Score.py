@@ -1,17 +1,12 @@
 import pygame
-import __init__.py  
+import math
+import random
 
-clock = pygame.time.Clock()
-
-class Score:
+class Score():
   def __init__(self):
-    self.score = 1
-    self.x = 0
-    self.y = 0
-    self.v = 0
-    self.g = 0
-  def changeScore(score):
-    while(done == False):
-      clock.tick(60)
-      score = 100 + (score * .002)
-      print(score)
+    pygame.sprite.Sprite.__init__(self)
+    self.score = 0
+
+  def changeScore(self, current_score):
+      self.score = math.floor(current_score + (random.randrange(75, 105) + (current_score * .0005)))
+      return self.score
