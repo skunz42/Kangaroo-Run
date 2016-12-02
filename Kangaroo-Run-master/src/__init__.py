@@ -3,7 +3,7 @@ from Score import Score
 from Kangaroo import Kangaroo
 from Cactus import Cactus
 from BackGround import Background
-
+from Login import Login
 #test 2
 
 pygame.init()
@@ -31,11 +31,13 @@ kangSprite = pygame.sprite.RenderPlain(kang)
 cact = Cactus()
 cactSprite = pygame.sprite.RenderPlain(cact)
 
+login = Login()
+
 score = Score()
 starting_score = 0
 
 largeText = pygame.font.Font("yoshi.ttf",60)
-mediumText = pygame.font.Font("yoshi.ttf",48)
+mediumText = pygame.font.Font("yoshi.ttf",36)
 smallText = pygame.font.Font("yoshi.ttf",18)
 pause = False
 
@@ -89,12 +91,16 @@ def text_objects(text, font, color = white):
     textSurface = font.render(text, True, color)
     return textSurface, textSurface.get_rect()
 
-def button(msg,x,y,w,h,i_color,a_color,action=None):
+def button(msg,x,y,w,h,i_color,a_color,text_size, action=None):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
     if(x + w > mouse[0] > x and y + h > mouse[1] > y):
         pygame.draw.rect(screen, a_color,(x,y, w,h))
         if(click[0] == 1 and action != None):
+            if(action == "login"):
+                login_screen = loginScreen()
+            if(action == "user"):
+                login.loginLoop()
             if(action == "play"):
                 game_loop()
                 if(action == "quit"):
@@ -104,10 +110,28 @@ def button(msg,x,y,w,h,i_color,a_color,action=None):
         pygame.draw.rect(screen, i_color,(x,y, w,h))
 
 
-    TextSurf, TextRect = text_objects(msg,smallText)
+    TextSurf, TextRect = text_objects(msg,text_size)
     TextRect.center = ((x+(w/2)),(y+(h/2)))
     screen.blit(TextSurf, TextRect)
-
+def loginScreen():
+    login_screen = True
+    screen.blit(backGround.image, backGround.rect)
+    while(login_screen == True):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                login_screen == False
+                pygame.quit()
+                quit()
+        pygame.display.update()
+        clock.tick(15)
+        button("[USERNAME]",420,250,240,39,black,button_light,mediumText)
+        button("[PASSWORD]",420,350,240,39,black,button_light,mediumText)
+        writeText("Username",420,100,240,39,largeText,black)
+        writeText("Note, Click the button then type.", 420,200,240,39, mediumText, black)
+def writeText(text,x,y,w,h,size,color):
+    TextSurf, TextRect = text_objects(text, size, color)
+    TextRect.center = (x + (w/2)),(y + (h/2))
+    screen.blit(TextSurf, TextRect)
 def paused():
     while(pause):
         for event in pygame.event.get():
@@ -118,8 +142,8 @@ def paused():
         TextRect.center = ((1080/2),(540/2))
         screen.blit(TextSurf, TextRect)
 
-        button("[CONTINUE]",420,300,240,39,black,button_light,"play")
-        button("[QUIT]",860,440,140,40,black,button_light,"quit")
+        button("[CONTINUE]",420,300,240,39,black,button_light,smallText,"play")
+        button("[QUIT]",860,440,140,40,black,button_light,smallText,"quit")
 
         pygame.display.update()
         clock.tick(15)
@@ -136,8 +160,9 @@ def game_intro():
         TextRect.center = ((1080/2),(540/2))
         screen.blit(TextSurf, TextRect)
 
-        button("[CLICK HERE TO BEGIN]",420,300,240,39,black,button_light,"play")
-        button("[QUIT]",860,440,140,40,black,button_light,"quit")
+
+        button("[CLICK HERE TO LOGIN]",420,300,240,39,black,button_light,smallText,"login")
+        button("[QUIT]",860,440,140,40,black,button_light,smallText,"quit")
 
         pygame.display.update()
         clock.tick(15)
