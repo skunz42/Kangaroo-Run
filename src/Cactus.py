@@ -10,16 +10,20 @@ class Cactus(pygame.sprite.Sprite):
 		self.y = 415
 		self.rect.x = 1080
 		self.rect.y = 415
-		self.v = 2
+		self.v = 4
+		self.move = True
 
 		screen = pygame.display.get_surface()
 		self.area = screen.get_rect()
-		self.state = "moving"
+
+	def freezeCact(self):
+		self.move = False
 
 	def draw(self, screen):
-		if self.rect.x < -50:
-			self.rect.x = 1080
-		self.rect.x -= self.v
-		self.v += 1/500
+		if self.move:
+			if self.rect.x < -50:
+				self.rect.x = 1080
+			self.rect.x -= self.v
+			self.v += 1/500
 
 		screen.blit(self.image, (self.rect.x, self.rect.y))

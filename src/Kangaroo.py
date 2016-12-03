@@ -7,6 +7,7 @@ class Kangaroo(pygame.sprite.Sprite):
         '''Initializes kangaroo sprite'''
         pygame.sprite.Sprite.__init__(self)
         self.image, self.rect = load_png('../assets/kangaroo-frame-0.png')
+        self.rect = self.rect.inflate(-64, -64)
 
         self.jumpup = False
         self.colliding = False
@@ -20,7 +21,6 @@ class Kangaroo(pygame.sprite.Sprite):
 
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
-        self.state = "still"
 
         self.imageCounter = 0
         self.counter = 10
@@ -47,7 +47,6 @@ class Kangaroo(pygame.sprite.Sprite):
 
     def collide(self):
         self.colliding = True
-        print("aaaaaaa")
 
     def draw(self, screen):
         if self.jumpup:
@@ -60,6 +59,7 @@ class Kangaroo(pygame.sprite.Sprite):
                 self.jumpup = False
 
         if self.colliding:
+            print("collision")
             self.colliding = False
             
         screen.blit(self.image, (self.rect.x, self.rect.y))

@@ -11,6 +11,9 @@ screen = pygame.display.set_mode((1080, 540))
 pygame.display.set_caption('Kangaroo Run')
 white = (255, 255, 255)
 
+score = 0
+myfont = pygame.font.SysFont("monospace", 16)
+
 background = pygame.Surface(screen.get_size())
 background = background.convert()
 background.fill(white)
@@ -28,8 +31,10 @@ kangSprite = pygame.sprite.RenderPlain(kang)
 cact = Cactus()
 cactSprite = pygame.sprite.RenderPlain(cact)
 
-done = False
 clock = pygame.time.Clock()
+
+done = False
+game_over = False
 
 while not done:
     clock.tick(60)
@@ -41,23 +46,28 @@ while not done:
                 kang.jump()
 
     if kang.rect.colliderect(cact.rect):
-        #print(kang.rect.size, kang.rect.topleft, kang.rect.bottomright)
-        #print(cact.rect.size, cact.rect.topleft, cact.rect.bottomright)
         kang.collide()
-            
-    #kang.handlekeys()
-    #screen.blit(kang, (0,0))
+        game_over = True
     
     screen.blit(backGround.image, (0,0))
     screen.blit(backGround.image, backGround.rect)
+
+    if game_over:
+        textgo = myfont.render("Game Over", 0, (0,0,0))
+        screen.blit(textgo, (450, 100))
+        kang.kill()
+        cact.freezeCact()
+
+    label = myfont.render("Score: {0}".format(score), 0, (0, 0, 0))
+    screen.blit(label, (900, 10))
+    if not game_over:
+        score += 1
     
     kang.draw(screen)
     kangSprite.update()
 
     cact.draw(screen)
     cactSprite.update()
-
-    #kangSprite.draw(screen)
 
     pygame.display.update()
     pygame.display.flip()
