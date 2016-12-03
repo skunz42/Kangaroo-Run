@@ -3,8 +3,6 @@ from Kangaroo import Kangaroo
 from Cactus import Cactus
 from BackGround import Background
 
-#test 2
-
 pygame.init()
 #Sets Up Screen
 screen = pygame.display.set_mode((1080, 540))

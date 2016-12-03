@@ -16,16 +16,14 @@ class Kangaroo(pygame.sprite.Sprite):
         self.y = 415
         self.rect.x = 0
         self.rect.y = 415
-        self.v = -20
-        self.g = 1
+        self.v = -20 #Velocity
+        self.g = 1 #Gravity constant
 
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
 
-        self.imageCounter = 0
+        self.imageCounter = 0 #For images
         self.counter = 10
-
-        #self.reinit()
 
     def reinit(self):
         '''Moves kangaroo to position'''
@@ -35,6 +33,7 @@ class Kangaroo(pygame.sprite.Sprite):
         self.rect.y = 415
 
     def freezeKang(self):
+        '''Freezes kangaroo in place if collision occurs'''
         self.jumpup = False
         self.counter = 0
 
@@ -48,12 +47,15 @@ class Kangaroo(pygame.sprite.Sprite):
             self.imageCounter = 0
 
     def jump(self):
+        '''Sets jump to true'''
         self.jumpup = True
 
     def collide(self):
+        '''Sets collision to true'''
         self.colliding = True
 
     def draw(self, screen):
+        '''Jump equation'''
         if self.jumpup:
             self.v += self.g #Increments velocity
             self.rect.y += self.v #Changes y position
