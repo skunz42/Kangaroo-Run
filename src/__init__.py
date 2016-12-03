@@ -47,6 +47,8 @@ while not done:
                 cact.reinit()
                 score = 0
                 game_over = False
+            if event.key == pygame.K_q:
+                done = True
 
     screen.blit(backGround.image, (0,0))
     screen.blit(backGround.image, backGround.rect)
