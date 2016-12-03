@@ -44,18 +44,23 @@ while not done:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 kang.jump()
+            if event.key == pygame.K_r:
+                kang.reinit()
+                cact.reinit()
+                score = 0
+                game_over = False
+
+    screen.blit(backGround.image, (0,0))
+    screen.blit(backGround.image, backGround.rect)
 
     if kang.rect.colliderect(cact.rect):
         kang.collide()
         game_over = True
-    
-    screen.blit(backGround.image, (0,0))
-    screen.blit(backGround.image, backGround.rect)
 
     if game_over:
         textgo = myfont.render("Game Over", 0, (0,0,0))
         screen.blit(textgo, (450, 100))
-        kang.kill()
+        kang.freezeKang()
         cact.freezeCact()
 
     label = myfont.render("Score: {0}".format(score), 0, (0, 0, 0))

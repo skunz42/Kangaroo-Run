@@ -27,11 +27,16 @@ class Kangaroo(pygame.sprite.Sprite):
 
         #self.reinit()
 
-    #def reinit(self):
+    def reinit(self):
         '''Moves kangaroo to position'''
-        #self.state = "still"
-        #self.movepos = [0,0]
-        #self.rect.bottomleft = self.area.bottomleft
+        self.x = 0
+        self.y = 415
+        self.rect.x = 0
+        self.rect.y = 415
+
+    def freezeKang(self):
+        self.jumpup = False
+        self.counter = 0
 
     def update(self):
         '''Cycles through kangaroo images'''
@@ -59,7 +64,6 @@ class Kangaroo(pygame.sprite.Sprite):
                 self.jumpup = False
 
         if self.colliding:
-            print("collision")
             self.colliding = False
             
         screen.blit(self.image, (self.rect.x, self.rect.y))

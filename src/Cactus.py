@@ -16,6 +16,14 @@ class Cactus(pygame.sprite.Sprite):
 		screen = pygame.display.get_surface()
 		self.area = screen.get_rect()
 
+	def reinit(self):
+		self.x = 1080
+		self.y = 415
+		self.rect.x = 1080
+		self.rect.y = 415
+		self.v = 4
+		self.move = True
+
 	def freezeCact(self):
 		self.move = False
 
