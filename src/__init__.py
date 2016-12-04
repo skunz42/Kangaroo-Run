@@ -42,15 +42,21 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
         elif event.type == pygame.KEYDOWN:
+            '''Jump'''
             if event.key == pygame.K_UP:
                 kang.jump()
+            '''Restart'''
             if event.key == pygame.K_r:
                 kang.reinit()
                 cact.reinit()
                 score = 0
+                pause = False
+                pauseCount = 1
                 game_over = False
+            '''Quit'''
             if event.key == pygame.K_q:
                 done = True
+            '''Pause'''
             if event.key == pygame.K_p:
                 pauseCount += 1
                 if pauseCount % 2 == 0:
