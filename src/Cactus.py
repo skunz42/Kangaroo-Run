@@ -31,6 +31,9 @@ class Cactus(pygame.sprite.Sprite):
 	def freezeCact(self):
 		'''Stops cactus in collision'''
 		self.move = False
+	
+	def resumeCact(self):
+		self.move = True
 
 	def draw(self, screen):
 		'''Speeds up cactus'''

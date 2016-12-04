@@ -33,6 +33,8 @@ clock = pygame.time.Clock()
 
 done = False
 game_over = False
+pause = False
+pauseCount = 1
 
 while not done:
     clock.tick(60)
@@ -49,6 +51,15 @@ while not done:
                 game_over = False
             if event.key == pygame.K_q:
                 done = True
+            if event.key == pygame.K_p:
+                pauseCount += 1
+                if pauseCount % 2 == 0:
+                    kang.freezeKang()
+                    cact.freezeCact()
+                    pause = True
+                elif pauseCount % 2 == 1:
+                    cact.resumeCact()
+                    pause = False
 
     screen.blit(backGround.image, (0,0))
     screen.blit(backGround.image, backGround.rect)
@@ -59,13 +70,19 @@ while not done:
 
     if game_over:
         textgo = myfont.render("Game Over", 0, (0,0,0))
-        screen.blit(textgo, (450, 100))
+        screen.blit(textgo, (475, 150))
         kang.freezeKang()
         cact.freezeCact()
+    
+    if pause:
+        texths = myfont.render("Press H For High Scores", 0, (0,0,0))
+        screen.blit(texths, (10, 10))
+        textps = myfont.render("Press P To Resume", 0, (0,0,0))
+        screen.blit(textps, (425, 10))
 
     label = myfont.render("Score: {0}".format(score), 0, (0, 0, 0))
     screen.blit(label, (900, 10))
-    if not game_over:
+    if not game_over and not pause:
         score += 1
     
     kang.draw(screen)
