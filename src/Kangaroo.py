@@ -29,6 +29,7 @@ class Kangaroo(pygame.sprite.Sprite):
         '''Moves kangaroo to position'''
         self.x = 0
         self.y = 415
+        self.v = -20
         self.rect.x = 0
         self.rect.y = 415
 

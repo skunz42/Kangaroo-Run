@@ -75,33 +75,39 @@ while not done:
     screen.blit(backGround.image, (0,0))
     screen.blit(backGround.image, backGround.rect)
 
+    '''Title Screen'''
     if not start:
         textstart = myfont.render("Press S to Start", 0, (0,0,0))
         screen.blit(textstart, (435, 120))
         texttitle = titlefont.render("Kangaroo Run", 0, (240, 0, 0))
         screen.blit(texttitle, (400, 75))
 
+    '''Collision'''
     if kang.rect.colliderect(cact.rect):
         kang.collide()
         game_over = True
-
+    
+    '''Game Over Screen'''
     if game_over:
         textgo = myfont.render("Game Over", 0, (0,0,0))
         screen.blit(textgo, (475, 150))
         kang.freezeKang()
         cact.freezeCact()
     
+    '''Pause Screen'''
     if pause:
         texths = myfont.render("Press H For High Scores", 0, (0,0,0))
         screen.blit(texths, (10, 10))
         textps = myfont.render("Press P To Resume", 0, (0,0,0))
         screen.blit(textps, (425, 10))
 
+    '''Displays Score'''
     label = myfont.render("Score: {0}".format(score), 0, (0, 0, 0))
     screen.blit(label, (900, 10))
     if not game_over and not pause and start:
         score += 1
     
+    '''Loads cactus and kangaroo after start'''
     if start:
         kang.draw(screen)
         kangSprite.update()
