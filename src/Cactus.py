@@ -9,11 +9,11 @@ class Cactus(pygame.sprite.Sprite):
 		self.rect = self.rect.inflate(-32, -32)
 
 		self.x = 1080
-		self.y = 430
+		self.y = 420
 		self.rect.x = 1080
 		self.rect.y = 420
 
-		self.v = 5 #Velocity
+		self.v = 8 #Velocity
 		self.move = True
 
 		screen = pygame.display.get_surface()
@@ -22,10 +22,10 @@ class Cactus(pygame.sprite.Sprite):
 	def reinit(self):
 		'''Moves Cactus to position'''
 		self.x = 1080
-		self.y = 415
+		self.y = 420
 		self.rect.x = 1080
-		self.rect.y = 415
-		self.v = 4
+		self.rect.y = 420
+		self.v = 8
 		self.move = True
 
 	def freezeCact(self):

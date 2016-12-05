@@ -11,6 +11,7 @@ white = (255, 255, 255)
 
 score = 0
 myfont = pygame.font.SysFont("monospace", 16)
+titlefont = pygame.font.SysFont("monospace", 32)
 
 background = pygame.Surface(screen.get_size())
 background = background.convert()
@@ -32,6 +33,7 @@ cactSprite = pygame.sprite.RenderPlain(cact)
 clock = pygame.time.Clock()
 
 done = False
+start = False
 game_over = False
 pause = False
 pauseCount = 1
@@ -66,9 +68,18 @@ while not done:
                 elif pauseCount % 2 == 1:
                     cact.resumeCact()
                     pause = False
+            '''Start'''
+            if event.key == pygame.K_s:
+                start = True
 
     screen.blit(backGround.image, (0,0))
     screen.blit(backGround.image, backGround.rect)
+
+    if not start:
+        textstart = myfont.render("Press S to Start", 0, (0,0,0))
+        screen.blit(textstart, (435, 120))
+        texttitle = titlefont.render("Kangaroo Run", 0, (240, 0, 0))
+        screen.blit(texttitle, (400, 75))
 
     if kang.rect.colliderect(cact.rect):
         kang.collide()
@@ -88,14 +99,15 @@ while not done:
 
     label = myfont.render("Score: {0}".format(score), 0, (0, 0, 0))
     screen.blit(label, (900, 10))
-    if not game_over and not pause:
+    if not game_over and not pause and start:
         score += 1
     
-    kang.draw(screen)
-    kangSprite.update()
+    if start:
+        kang.draw(screen)
+        kangSprite.update()
 
-    cact.draw(screen)
-    cactSprite.update()
+        cact.draw(screen)
+        cactSprite.update()
 
     pygame.display.update()
     pygame.display.flip()
