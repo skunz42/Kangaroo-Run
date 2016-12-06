@@ -91,6 +91,10 @@ while not done:
     if game_over:
         textgo = myfont.render("Game Over", 0, (0,0,0))
         screen.blit(textgo, (475, 150))
+        textre = myfont.render("Press R to Restart", 0, (0,0,0))
+        screen.blit(textre, (430, 180))
+        textqu = myfont.render("Press Q to Quit", 0, (0,0,0))
+        screen.blit(textqu, (440, 210))
         kang.freezeKang()
         cact.freezeCact()
     
