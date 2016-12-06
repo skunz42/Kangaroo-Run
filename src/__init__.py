@@ -106,13 +106,12 @@ while not done:
         screen.blit(textps, (425, 10))
 
     '''Displays Score'''
-    label = myfont.render("Score: {0}".format(score), 0, (0, 0, 0))
-    screen.blit(label, (900, 10))
-    if not game_over and not pause and start:
-        score += 1
-    
-    '''Loads cactus and kangaroo after start'''
     if start:
+        label = myfont.render("Score: {0}".format(score), 0, (0, 0, 0))
+        screen.blit(label, (900, 10))
+        if not game_over and not pause and start:
+            score += 1    
+        '''Loads cactus and kangaroo after start'''
         kang.draw(screen)
         kangSprite.update()
 
