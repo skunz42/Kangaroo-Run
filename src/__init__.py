@@ -18,16 +18,21 @@ scorefile = open("../assets/scores.txt", "r")
 highscore = int(scorefile.read())
 scorefile.close()
 
+'''Fonts'''
+
 myfont = pygame.font.SysFont("monospace", 16)
 titlefont = pygame.font.SysFont("monospace", 32)
 
+'''Text'''
+
 textstart = myfont.render("Press S to Start", 0, (0,0,0))
-texttitle = titlefont.render("Kangaroo Run", 0, (240, 0, 0))
+texttitle = titlefont.render("Kangaroo Run", 0, (0, 0, 0))
 textre = myfont.render("Press R to Restart", 0, (0,0,0))
 textqu = myfont.render("Press Q to Quit", 0, (0,0,0))
-#textscores = myfont.render(scorefile, 0, (0,0,0))
 textps = myfont.render("Press P To Resume", 0, (0,0,0))
 textgo = myfont.render("Game Over", 0, (0,0,0))
+
+'''Background'''
 
 background = pygame.Surface(screen.get_size())
 background = background.convert()
@@ -55,6 +60,8 @@ cloudSprite = pygame.sprite.RenderPlain(cloud)
 cloud2 = Cloud()
 cloud2Sprite = pygame.sprite.RenderPlain(cloud)
 
+'''Music'''
+
 pygame.mixer.init(22050,-16,2,4096)
 pygame.mixer.music.load("../assets/song.mp3")
 pygame.mixer.music.set_volume(.5)
@@ -67,8 +74,6 @@ start = False
 game_over = False
 pause = False
 pauseCount = 1
-scoremenu = False
-scoreCount = 1
 
 while not done:
     clock.tick(60)
@@ -94,7 +99,7 @@ while not done:
             if event.key == pygame.K_q:
                 done = True
             '''Pause'''
-            if event.key == pygame.K_p:
+            if event.key == pygame.K_p and start:
                 pauseCount += 1
                 if pauseCount % 2 == 0:
                     kang.freezeKang()
@@ -131,6 +136,7 @@ while not done:
         kang.freezeKang()
         cact.freezeCact()
         cact2.freezeCact()
+        '''Sets new highscore'''
         if score > highscore:
             highscore = score
             scorefile = open("../assets/scores.txt", "w")
@@ -138,8 +144,7 @@ while not done:
             scorefile.close()
     
     '''Pause Screen'''
-    if pause:
-        screen.blit(texths, (10, 10))
+    if pause and start:
         screen.blit(textps, (425, 10))
 
     '''Displays Score'''
