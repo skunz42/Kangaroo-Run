@@ -1,4 +1,5 @@
 import pygame
+import json
 from Kangaroo import Kangaroo
 from Cactus import Cactus
 from Cloud import Cloud
@@ -11,6 +12,12 @@ pygame.display.set_caption('Kangaroo Run')
 white = (255, 255, 255)
 
 score = 0
+highscore = 0
+
+scorefile = open("../assets/scores.txt", "r")
+highscore = int(scorefile.read())
+scorefile.close()
+
 myfont = pygame.font.SysFont("monospace", 16)
 titlefont = pygame.font.SysFont("monospace", 32)
 
@@ -18,7 +25,7 @@ textstart = myfont.render("Press S to Start", 0, (0,0,0))
 texttitle = titlefont.render("Kangaroo Run", 0, (240, 0, 0))
 textre = myfont.render("Press R to Restart", 0, (0,0,0))
 textqu = myfont.render("Press Q to Quit", 0, (0,0,0))
-texths = myfont.render("Press H For High Scores", 0, (0,0,0))
+#textscores = myfont.render(scorefile, 0, (0,0,0))
 textps = myfont.render("Press P To Resume", 0, (0,0,0))
 textgo = myfont.render("Game Over", 0, (0,0,0))
 
@@ -60,6 +67,8 @@ start = False
 game_over = False
 pause = False
 pauseCount = 1
+scoremenu = False
+scoreCount = 1
 
 while not done:
     clock.tick(60)
@@ -96,6 +105,7 @@ while not done:
                     cact.resumeCact()
                     cact2.resumeCact()
                     pause = False
+            
             '''Start'''
             if event.key == pygame.K_s:
                 start = True
@@ -107,7 +117,6 @@ while not done:
     if not start:
         screen.blit(textstart, (435, 120))
         screen.blit(texttitle, (400, 75))
-        screen.blit(texths, (400, 150))
 
     '''Collision'''
     if kang.rect.colliderect(cact.rect) or kang.rect.colliderect(cact2.rect):
@@ -122,6 +131,11 @@ while not done:
         kang.freezeKang()
         cact.freezeCact()
         cact2.freezeCact()
+        if score > highscore:
+            highscore = score
+            scorefile = open("../assets/scores.txt", "w")
+            scorefile.write(str(highscore))
+            scorefile.close()
     
     '''Pause Screen'''
     if pause:
@@ -131,7 +145,9 @@ while not done:
     '''Displays Score'''
     if start:
         label = myfont.render("Score: {0}".format(score), 0, (0, 0, 0))
+        texths = myfont.render("High Score: {0}".format(highscore), 0, (0,0,0))
         screen.blit(label, (900, 10))
+        screen.blit(texths, (850, 40))
         if not game_over and not pause and start:
             score += 1    
         '''Loads cactus and kangaroo after start'''
