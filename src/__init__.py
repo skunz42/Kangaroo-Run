@@ -1,6 +1,7 @@
 import pygame
 from Kangaroo import Kangaroo
 from Cactus import Cactus
+from Cloud import Cloud
 from BackGround import Background
 
 pygame.init()
@@ -12,6 +13,14 @@ white = (255, 255, 255)
 score = 0
 myfont = pygame.font.SysFont("monospace", 16)
 titlefont = pygame.font.SysFont("monospace", 32)
+
+textstart = myfont.render("Press S to Start", 0, (0,0,0))
+texttitle = titlefont.render("Kangaroo Run", 0, (240, 0, 0))
+textre = myfont.render("Press R to Restart", 0, (0,0,0))
+textqu = myfont.render("Press Q to Quit", 0, (0,0,0))
+texths = myfont.render("Press H For High Scores", 0, (0,0,0))
+textps = myfont.render("Press P To Resume", 0, (0,0,0))
+textgo = myfont.render("Game Over", 0, (0,0,0))
 
 background = pygame.Surface(screen.get_size())
 background = background.convert()
@@ -29,6 +38,20 @@ kangSprite = pygame.sprite.RenderPlain(kang)
 
 cact = Cactus()
 cactSprite = pygame.sprite.RenderPlain(cact)
+
+cact2 = Cactus()
+cact2Sprite = pygame.sprite.RenderPlain(cact2)
+
+cloud = Cloud()
+cloudSprite = pygame.sprite.RenderPlain(cloud)
+
+cloud2 = Cloud()
+cloud2Sprite = pygame.sprite.RenderPlain(cloud)
+
+pygame.mixer.init(22050,-16,2,4096)
+pygame.mixer.music.load("../assets/song.mp3")
+pygame.mixer.music.set_volume(.5)
+pygame.mixer.music.play(-1)
 
 clock = pygame.time.Clock()
 
@@ -51,6 +74,9 @@ while not done:
             if event.key == pygame.K_r:
                 kang.reinit()
                 cact.reinit()
+                cact2.reinit()
+                cloud.reinit()
+                cloud2.reinit()
                 score = 0
                 pause = False
                 pauseCount = 1
@@ -64,9 +90,11 @@ while not done:
                 if pauseCount % 2 == 0:
                     kang.freezeKang()
                     cact.freezeCact()
+                    cact2.freezeCact()
                     pause = True
                 elif pauseCount % 2 == 1:
                     cact.resumeCact()
+                    cact2.resumeCact()
                     pause = False
             '''Start'''
             if event.key == pygame.K_s:
@@ -77,32 +105,27 @@ while not done:
 
     '''Title Screen'''
     if not start:
-        textstart = myfont.render("Press S to Start", 0, (0,0,0))
         screen.blit(textstart, (435, 120))
-        texttitle = titlefont.render("Kangaroo Run", 0, (240, 0, 0))
         screen.blit(texttitle, (400, 75))
+        screen.blit(texths, (400, 150))
 
     '''Collision'''
-    if kang.rect.colliderect(cact.rect):
+    if kang.rect.colliderect(cact.rect) or kang.rect.colliderect(cact2.rect):
         kang.collide()
         game_over = True
     
     '''Game Over Screen'''
     if game_over:
-        textgo = myfont.render("Game Over", 0, (0,0,0))
         screen.blit(textgo, (475, 150))
-        textre = myfont.render("Press R to Restart", 0, (0,0,0))
         screen.blit(textre, (430, 180))
-        textqu = myfont.render("Press Q to Quit", 0, (0,0,0))
         screen.blit(textqu, (440, 210))
         kang.freezeKang()
         cact.freezeCact()
+        cact2.freezeCact()
     
     '''Pause Screen'''
     if pause:
-        texths = myfont.render("Press H For High Scores", 0, (0,0,0))
         screen.blit(texths, (10, 10))
-        textps = myfont.render("Press P To Resume", 0, (0,0,0))
         screen.blit(textps, (425, 10))
 
     '''Displays Score'''
@@ -117,6 +140,17 @@ while not done:
 
         cact.draw(screen)
         cactSprite.update()
+
+        if score > 1000:
+            cact2.v = cact.v
+            cact2.draw(screen)
+            cact2Sprite.update()
+
+        cloud.draw(screen)
+        cloudSprite.update()
+
+        cloud2.draw(screen)
+        cloud2Sprite.update()
 
     pygame.display.update()
     pygame.display.flip()
