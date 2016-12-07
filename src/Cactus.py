@@ -6,7 +6,7 @@ class Cactus(pygame.sprite.Sprite):
 	def __init__(self):
 		pygame.sprite.Sprite.__init__(self)
 		self.image, self.rect = load_png('../assets/Cactus2.png')
-		self.rect = self.rect.inflate(-32, -32)
+		self.rect = self.rect.inflate(-40, -40)
 
 		self.x = 1080
 		self.y = 420
