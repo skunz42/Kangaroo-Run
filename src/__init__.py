@@ -1,5 +1,4 @@
 import pygame
-import json
 from Kangaroo import Kangaroo
 from Cactus import Cactus
 from Cloud import Cloud
@@ -29,7 +28,7 @@ textstart = myfont.render("Press S to Start", 0, (0,0,0))
 texttitle = titlefont.render("Kangaroo Run", 0, (0, 0, 0))
 textre = myfont.render("Press R to Restart", 0, (0,0,0))
 textqu = myfont.render("Press Q to Quit", 0, (0,0,0))
-textps = myfont.render("Press P To Resume", 0, (0,0,0))
+textps = myfont.render("Press P To Pause/Resume", 0, (0,0,0))
 textgo = myfont.render("Game Over", 0, (0,0,0))
 
 '''Background'''
@@ -122,6 +121,9 @@ while not done:
     if not start:
         screen.blit(textstart, (435, 120))
         screen.blit(texttitle, (400, 75))
+        screen.blit(textre, (425, 180))
+        screen.blit(textqu, (435, 210))
+        screen.blit(textps, (400, 240))
 
     '''Collision'''
     if kang.rect.colliderect(cact.rect) or kang.rect.colliderect(cact2.rect):
