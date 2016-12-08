@@ -19,8 +19,8 @@ scorefile.close()
 
 '''Fonts'''
 
-myfont = pygame.font.SysFont("monospace", 16)
-titlefont = pygame.font.SysFont("monospace", 32)
+myfont = pygame.font.SysFont("../assets/font.ttf", 18)
+titlefont = pygame.font.SysFont("../assets/font.ttf", 40)
 
 '''Text'''
 
@@ -119,11 +119,11 @@ while not done:
 
     '''Title Screen'''
     if not start:
-        screen.blit(textstart, (435, 120))
-        screen.blit(texttitle, (400, 75))
-        screen.blit(textre, (425, 180))
-        screen.blit(textqu, (435, 210))
-        screen.blit(textps, (400, 240))
+        screen.blit(textstart, (510, 120))
+        screen.blit(texttitle, (460, 75))
+        screen.blit(textre, (500, 170))
+        screen.blit(textqu, (510, 200))
+        screen.blit(textps, (480, 230))
 
     '''Collision'''
     if kang.rect.colliderect(cact.rect) or kang.rect.colliderect(cact2.rect):
@@ -132,9 +132,9 @@ while not done:
     
     '''Game Over Screen'''
     if game_over:
-        screen.blit(textgo, (475, 150))
-        screen.blit(textre, (430, 180))
-        screen.blit(textqu, (440, 210))
+        screen.blit(textgo, (500, 150))
+        screen.blit(textre, (480, 180))
+        screen.blit(textqu, (490, 210))
         kang.freezeKang()
         cact.freezeCact()
         cact2.freezeCact()
@@ -153,8 +153,8 @@ while not done:
     if start:
         label = myfont.render("Score: {0}".format(score), 0, (0, 0, 0))
         texths = myfont.render("High Score: {0}".format(highscore), 0, (0,0,0))
-        screen.blit(label, (900, 10))
-        screen.blit(texths, (850, 40))
+        screen.blit(label, (950, 10))
+        screen.blit(texths, (950, 40))
         if not game_over and not pause and start:
             score += 1    
         '''Loads cactus and kangaroo after start'''
