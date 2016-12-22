@@ -37,7 +37,10 @@ class Kangaroo(pygame.sprite.Sprite):
         '''Freezes kangaroo in place if collision occurs'''
         self.jumpup = False
         self.counter = 0
-
+    
+    def resumeKang(self):
+        self.jumpup = True
+        
     def update(self):
         '''Cycles through kangaroo images'''
         self.counter = self.counter + 1

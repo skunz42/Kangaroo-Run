@@ -108,6 +108,7 @@ class KangarooRun:
                             cact2.freezeCact()
                             pause = True
                         elif pauseCount % 2 == 1:
+                            kang.resumeKang()
                             cact.resumeCact()
                             cact2.resumeCact()
                             pause = False
