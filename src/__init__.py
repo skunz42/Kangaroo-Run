@@ -83,7 +83,7 @@ class KangarooRun:
                     done = True
                 elif event.type == pygame.KEYDOWN:
                     '''Jump'''
-                    if event.key == pygame.K_UP:
+                    if event.key == pygame.K_UP and pause == False:
                         kang.jump()
                     '''Restart'''
                     if event.key == pygame.K_r:
